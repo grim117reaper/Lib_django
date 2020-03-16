@@ -21,7 +21,7 @@ def index(request):
         if (len(request.POST["Author_Name_search"]) != 0):
             book_querry["Author_Name"] = request.POST["Author_Name_search"]
         if (len(request.POST["Genre_search"]) != 0):
-            book_querry["Genre_search"] = request.POST["Genre_search"]
+            book_querry["Genre"] = request.POST["Genre_search"]
     books_querry = collection_books.find(book_querry)
     for x in books_querry:
         if (x["Is_Lended"] == True):
