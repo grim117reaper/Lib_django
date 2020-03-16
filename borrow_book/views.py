@@ -25,7 +25,7 @@ def index(request):
     books_querry = collection_books.find(book_querry)
     for x in books_querry:
         if (x["Is_Lended"] == True):
-            lended_books = collection_borrow.find({"Book_Name":x["Book_Name"]})
+            lended_books = collection_borrow.find({"Book_Name":x["Book_Name"]}).sort([("End_date", -1)]).limit(1)
             print(lended_books.count())
             for y in lended_books:
                 x["Start_date"] = y["Start_date"]
