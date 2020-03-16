@@ -1,0 +1,16 @@
+<html>
+  <head>
+  </head>
+  <body>
+    <div>
+      <form method="post" action="enter_book" enctype='multipart/form-data'>
+      {% csrf_token %}
+      Book Name :  <input type="text" name="Book_name" id="Book_name"><br />
+      Author Name : <input type="text" name="Author_Name" id="Author_name"><br />
+      Genre : <input type="text" name="Genre" id="Genre"><br />
+      Cover : <input type="file" name="Cover" id="Cover"><br />
+      <input type="submit" id = "submit_btn" name = "submit_btn" class="btn btn-primary btn-block btn-large">
+      </form>
+    </div>
+  </body>
+</html>

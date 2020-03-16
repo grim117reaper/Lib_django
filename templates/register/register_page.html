@@ -1,0 +1,15 @@
+<html>
+  <head>
+  </head>
+  <body>
+    <div>
+      <form method="post" action="register_feed">
+      {% csrf_token %}
+      Esignum :  <input type="text" name="Esignum" id = "Esignum"><br />
+      Name : <input type="text" name="Name" id="Name"><br />
+      Password:  <input type="password" name="Password" id = "Password">
+      <input type="submit" id = "submit_btn" name = "submit_btn" class="btn btn-primary btn-block btn-large">
+      </form>
+    </div>
+  </body>
+</html>

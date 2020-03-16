@@ -1,0 +1,44 @@
+<h1>Hello {{Name}}</h1>
+
+<form method="post" action="/borrow_book/">
+  {% csrf_token %}
+  Book Name : <input type="text" name="Book_Name_search" id="Book_Name_search"><br />
+  Author Name : <input type="text" name="Author_Name_search" id="Author_Name_search"><br />
+  Genre : <input type="text" name="Genre_search" id="Genre_search"><br />
+  <input type="submit" name="Search_button" id="Search_button">
+</form>
+
+{% for dict_item in parent_dict %}
+<form method = "post" action = "/borrow_book/success">
+  {% csrf_token %}
+   {% for key, value in dict_item.items %}
+   {% if 'button' == key %}
+   <br /><input type = "submit" value = "Borrow">
+   {% elif 'Author_Name' == key %}
+   {{key}} : {{value}} <br />
+   {% elif 'Genre' == key %}
+   {{key}} : {{value}} <br />
+   {% elif 'Cover' == key %}
+   <br /><img src="{{MEDIA_URL}}{{value}}" width="100" height="100" /><br />
+   {% elif 'Book_Name' == key%}
+   {{key}} : {{value}} <br />
+   <input id="Book_Name" type="hidden" name="Book_Name" value="{{value}}">
+   {% elif '_id' in key%}
+   <input id = "Book_id" type = "hidden" name="Book_id" value="{{value}}">
+   {% elif 'Lender_Name' == key%}
+   {{key}} : {{value}} <br />
+   <input id="Lender_Name" type="hidden" name="Lender_Name" value="{{value}}">
+   {% elif 'Start_date' not in dict_item.keys%}
+    Start_date 2 : <input id="Start_date" type="date" name="Start_date"><br />
+    End Date : <input id="End_date" type = "date" name="End_date"><br />
+   {% elif 'Start_date' in dict_item.keys %}
+   {% if 'Start_date' == key %}
+      Start_date : <input id="Start_date" type="date" name="Start_date" min="{{value}}"> <br />
+    {% endif %}
+   {% endif %}
+   {% endif %}
+   {% endfor %}
+ </form>
+   <br />
+   <br />
+{% endfor %}

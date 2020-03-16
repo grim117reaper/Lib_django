@@ -1,0 +1,17 @@
+<html>
+  <head>
+  </head>
+  <body>
+    <div>
+      <form method = "post" action = "check_pass">
+      {% csrf_token %}
+      Esignum :  <input type="text" name="Esignum" id = "Esignum"><br />
+      Password:  <input type="password" name="Password" id = "Password">
+      <input type="submit" id = "submit_btn" name = "submit_btn" class="btn btn-primary btn-block btn-large">
+      </form>
+    </div>
+    <div>
+      <a href = "/register">Register </a>
+    </div>
+  </body>
+</html>
