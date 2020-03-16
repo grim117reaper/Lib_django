@@ -51,15 +51,16 @@ def success(request):
             try:
                 Book_id = request.POST["Book_id"]
                 Book_Name = request.POST["Book_Name"]
-                Lender_Name = request.POST["Lender_Name"]
+                Owner_Name = request.POST["Owner_Name"]
                 Borrower_Name = request.session["Name"]
                 Borrower_Signum = request.session["Esignum"]
                 Start_date = request.POST["Start_date"]
-                End_date = request.POST["End_date"]
+                end_date = (pd.to_datetime(Start_date) + pd.DateOffset(days=14)).strftime('%Y-%m-%d')
+                End_date = str(end_date)
                 querry = {
                 "Book_id" : Book_id,
                 "Book_Name" : Book_Name,
-                "Lender_Name" : Lender_Name,
+                "Owner_Name" : Owner_Name,
                 "Borrower_Name" : Borrower_Name,
                 "Borrower_Signum" : Borrower_Signum,
                 "Start_date" : Start_date,
@@ -69,9 +70,10 @@ def success(request):
                 try:
                     rec_id1 = collection_borrow.insert_one(querry)
                     try:
-                        myquery = { "Book_Name": request.POST["Book_Name"], "Lender_Name" : request.POST["Lender_Name"] }
+                        myquery = { "_id": int(request.POST["Book_id"]) }
                         newvalues = { "$set": { "Is_Lended": True } }
                         rec_id1 = collection_books.update_one(myquery, newvalues)
+                        print(rec_id1)
                         try:
                             response = redirect("/option")
                             return (response)
@@ -84,7 +86,8 @@ def success(request):
                     print(querry)
                     print("after querry form")
 
-            except:
+            except Exception as e:
+                print(e)
                 print(type(request.POST["Start_date"]))
                 print(request.POST)
                 print("after collection")

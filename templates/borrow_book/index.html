@@ -25,17 +25,15 @@
    <input id="Book_Name" type="hidden" name="Book_Name" value="{{value}}">
    {% elif '_id' in key%}
    <input id = "Book_id" type = "hidden" name="Book_id" value="{{value}}">
-   {% elif 'Lender_Name' == key%}
+   {% elif 'Owner_Name' == key%}
    {{key}} : {{value}} <br />
-   <input id="Lender_Name" type="hidden" name="Lender_Name" value="{{value}}">
+   <input id="Owner_Name" type="hidden" name="Owner_Name" value="{{value}}">
    {% elif 'Start_date' not in dict_item.keys%}
     Start_date 2 : <input id="Start_date" type="date" name="Start_date"><br />
-    End Date : <input id="End_date" type = "date" name="End_date"><br />
    {% elif 'Start_date' in dict_item.keys %}
    {% if 'Start_date' == key %}
-      Start_date : <input id="Start_date" type="date" name="Start_date" min="{{value}}"> <br />
+      Start_date : <input id="Start_date" type="date" name="Start_date" min="{{dict_item.End_date}}"> <br />
     {% endif %}
-   {% endif %}
    {% endif %}
    {% endfor %}
  </form>
