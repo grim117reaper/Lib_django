@@ -11,31 +11,20 @@
 {% for dict_item in parent_dict %}
 <form method = "post" action = "/borrow_book/success">
   {% csrf_token %}
-   {% for key, value in dict_item.items %}
-   {% if 'button' == key %}
-   <br /><input type = "submit" value = "Borrow">
-   {% elif 'Author_Name' == key %}
-   {{key}} : {{value}} <br />
-   {% elif 'Genre' == key %}
-   {{key}} : {{value}} <br />
-   {% elif 'Cover' == key %}
-   <br /><img src="{{MEDIA_URL}}{{value}}" width="100" height="100" /><br />
-   {% elif 'Book_Name' == key%}
-   {{key}} : {{value}} <br />
-   <input id="Book_Name" type="hidden" name="Book_Name" value="{{value}}">
-   {% elif '_id' in key%}
-   <input id = "Book_id" type = "hidden" name="Book_id" value="{{value}}">
-   {% elif 'Owner_Name' == key%}
-   {{key}} : {{value}} <br />
-   <input id="Owner_Name" type="hidden" name="Owner_Name" value="{{value}}">
-   {% elif 'Start_date' not in dict_item.keys%}
-    Start_date 2 : <input id="Start_date" type="date" name="Start_date"><br />
+   Author_Name : {{dict_item.Author_Name}} <br />
+   Genre : {{dict_item.Genre}} <br />
+   <br /><img src="{{MEDIA_URL}}{{dict_item.Cover}}" width="100" height="100" /><br />
+   Book_Name : {{dict_item.Book_Name}} <br />
+   <input id="Book_Name" type="hidden" name="Book_Name" value="{{dict_item.Book_Name}}">
+   <input id = "Book_id" type = "hidden" name="Book_id" value="{{dict_item.Book_id}}">
+   Owner_Name : {{dict_item.Owner_Name}} <br />
+   <input id="Owner_Name" type="hidden" name="Owner_Name" value="{{dict_item.Owner_Name }}">
+   {% if 'Start_date' not in dict_item.keys%}
+    Start_date : <input id="Start_date" type="date" name="Start_date"><br />
    {% elif 'Start_date' in dict_item.keys %}
-   {% if 'Start_date' == key %}
-      Start_date : <input id="Start_date" type="date" name="Start_date" min="{{dict_item.End_date}}"> <br />
+    Start_date : <input id="Start_date" type="date" name="Start_date" min="{{dict_item.End_date}}"> <br />
     {% endif %}
-   {% endif %}
-   {% endfor %}
+    <input type = "submit" value = "Borrow"><br />
  </form>
    <br />
    <br />
